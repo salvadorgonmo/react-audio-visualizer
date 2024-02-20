@@ -7,7 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      audio: null
+      audio: null,
+      strokeStyle: 'osc'
     };
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
   }
@@ -33,15 +34,25 @@ class App extends Component {
     }
   }
 
+  toggleVisualizer = () => {
+    if (this.state.strokeStyle === 'osc') this.setState({ strokeStyle: 'bar'})
+    if (this.state.strokeStyle === 'bar') this.setState({ strokeStyle: 'osc'})
+  }
+
   render() {
     return (
       <div className="App">
         <div className="controls">
-          <button onClick={this.toggleMicrophone}>
+          <h1>{this.state.strokeStyle === 'osc' ? 'Waveform/Oscilloscope Demo' : 'Bar Graph Demo'}</h1>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <button onClick={this.toggleVisualizer} style={{ width: 'fit-content', backgroundColor: 'blue', marginBottom: '30px'}} disabled={this.state.audio}>{this.state.strokeStyle === 'osc' ? 'Use Bar Graph' : 'Use Waveform/Oscilloscope Graph'}</button>
+          <button style={{ width: 'fit-content'}}  onClick={this.toggleMicrophone}>
             {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
           </button>
+          </div>
+
         </div>
-        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
+        {this.state.audio ? <AudioAnalyser audio={this.state.audio} strokeStyle={this.state.strokeStyle} /> : ''}
       </div>
     );
   }

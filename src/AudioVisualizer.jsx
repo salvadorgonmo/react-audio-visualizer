@@ -7,7 +7,12 @@ class AudioVisualiser extends Component {
   }
 
   componentDidUpdate() {
-    this.draw();
+    if (this.props.strokeStyle === 'osc') {
+      this.draw();
+      return;
+    }
+
+
   }
 
   draw() {
@@ -39,6 +44,30 @@ context.strokeStyle = gradient;
     context.lineTo(x, height / 2);
     context.stroke();
     
+  }
+
+  drawBar = () => {
+    const { audioData, analyser } = this.props;
+    const bufferLength = analyser.frequencyBinCount;
+    const canvas = this.canvas.current;
+    const height = canvas.height;
+    const width = canvas.width;
+    const context = canvas.getContext('2d');
+    let x = 0;
+    const sliceWidth = (width * 1.0) / audioData.length;
+    canvas.clearRect(0, 0, width, height);
+    canvas.fillStyle = "rgb(0 0 0)";
+    canvas.fillRect(0, 0, width, height);
+    const barWidth = (width / bufferLength) * 2.5;
+let barHeight;
+for (let i = 0; i < bufferLength; i++) {
+  barHeight = audioData[i] / 2;
+
+  canvas.fillStyle = `rgb(${barHeight + 100} 50 50)`;
+  canvas.fillRect(x, height - barHeight / 2, barWidth, barHeight);
+
+  x += barWidth + 1;
+}
   }
 
   render() {
