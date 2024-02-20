@@ -19,8 +19,14 @@ class AudioVisualiser extends Component {
     let x = 0;
     const sliceWidth = (width * 1.0) / audioData.length;
 
-    context.lineWidth = 2;
-    context.strokeStyle = '#000000';
+    context.lineWidth = 5;
+// Create linear gradient
+const gradient = context.createLinearGradient(0, 0, width, 0);
+gradient.addColorStop(0, '#0E54CF');
+gradient.addColorStop(1, '#3EC1A5');
+
+// Apply gradient as stroke style
+context.strokeStyle = gradient;
     context.clearRect(0, 0, width, height);
 
     context.beginPath();
@@ -32,6 +38,7 @@ class AudioVisualiser extends Component {
     }
     context.lineTo(x, height / 2);
     context.stroke();
+    
   }
 
   render() {
