@@ -46,10 +46,10 @@ class App extends Component {
         <div className="controls">
           <h1>{this.state.strokeStyle === 'osc' ? 'Waveform/Oscilloscope Demo' : 'Bar Graph Demo'}</h1>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-          <button onClick={this.toggleVisualizer} style={{ width: 'fit-content', backgroundColor: 'blue', marginBottom: '30px'}} disabled={this.state.audio}>{this.state.strokeStyle === 'osc' ? 'Use Bar Graph' : 'Use Waveform/Oscilloscope Graph'}</button>
+          {/* <button onClick={this.toggleVisualizer} style={{ width: 'fit-content', backgroundColor: 'blue', marginBottom: '30px'}} disabled={this.state.audio}>{this.state.strokeStyle === 'osc' ? 'Use Bar Graph' : 'Use Waveform/Oscilloscope Graph'}</button>
           <button style={{ width: 'fit-content'}}  onClick={this.toggleMicrophone}>
             {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
-          </button>
+          </button> */}
           </div>
           {/* Remove this when we are ready to use it with mic*/}
           <AudioVisualiser />
