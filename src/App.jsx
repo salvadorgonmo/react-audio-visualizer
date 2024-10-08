@@ -2,6 +2,7 @@
 import './App.css'
 import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyzer';
+import AudioVisualiser from './AudioVisualizer';
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +51,8 @@ class App extends Component {
             {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
           </button>
           </div>
+          {/* Remove this when we are ready to use it with mic*/}
+          <AudioVisualiser />
 
         </div>
         {this.state.audio ? <AudioAnalyser audio={this.state.audio} strokeStyle={this.state.strokeStyle} /> : ''}
